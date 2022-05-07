@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6bf29584-d2e1-4fd2-88c7-aa6e1e967311" name="Changes" comment="Added command messaging">
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandPipelines/PipelineInvoker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandPipelines/PipelineInvoker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/ICommandPostProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/ICommandPostprocessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/TypeValidationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/TypeValidationExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandTestsEntities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandTestsEntities.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/17.1.0/build/netcoreapp2.1/Microsoft.NET.Test.Sdk.Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/377b61b613ea444f826f377d9474ffca3c9a8/b5/3e1114a1/TestInvoker`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/45f36c345e404f57aeaf50045d981e6994000/e7/605ff0af/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/73861f289e3ca779abb49afbe7823847e8b1ed14a40f5fa782ba6ad853d8/RuntimeHelpers.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a645e44f75643f7f28fd898e1a63637571b24ee0c1937ce879de58e92b/AnyAll.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aec8f52367c5a362193c977347c963ff857cd35a4345376c7a7f6ea6edbef8/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
+  <component name="ProjectId" id="28hbw6XOXeDfHOqvt252Wpq2fzf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bf29584-d2e1-4fd2-88c7-aa6e1e967311" name="Changes" comment="" />
+      <created>1651671999813</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651671999813</updated>
+      <workItem from="1651672005670" duration="6287000" />
+      <workItem from="1651678655297" duration="2381000" />
+      <workItem from="1651688730934" duration="6505000" />
+      <workItem from="1651764269843" duration="9736000" />
+      <workItem from="1651833549053" duration="7218000" />
+      <workItem from="1651864662498" duration="694000" />
+      <workItem from="1651932434753" duration="2586000" />
+      <workItem from="1651946279910" duration="1205000" />
+      <workItem from="1651947509919" duration="317000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added command messaging">
+      <created>1651932598970</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651932598971</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Wrap up middlewares and added tests">
+      <created>1651946637164</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1651946637164</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed directory of tests">
+      <created>1651946821268</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651946821268</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added command messaging">
+      <created>1651947729910</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1651947729910</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="CommandMessaging" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Wrap up middlewares and added tests" />
+    <MESSAGE value="Changed directory of tests" />
+    <MESSAGE value="Added command messaging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added command messaging" />
+  </component>
+</project>

@@ -8,7 +8,7 @@ internal interface IPipelineInvoker
     IReadOnlyCollection<ICommandPreprocessor<TCommand>> InvokePreprocessors<TCommand>(TCommand command)
         where TCommand : ICommand;
 
-    IReadOnlyCollection<ICommandPostProcessor<TCommand>> InvokePostprocessors<TCommand>(TCommand command)
+    IReadOnlyCollection<ICommandPostprocessor<TCommand>> InvokePostprocessors<TCommand>(TCommand command)
         where TCommand : ICommand;
 
     IReadOnlyCollection<ICommandMiddleware<TCommand>> InvokeMiddlewares<TCommand>(TCommand command)
@@ -36,13 +36,13 @@ internal class PipelineInvoker : IPipelineInvoker
             .ToArray();
     }
     
-    public IReadOnlyCollection<ICommandPostProcessor<TCommand>> InvokePostprocessors<TCommand>(TCommand command)
+    public IReadOnlyCollection<ICommandPostprocessor<TCommand>> InvokePostprocessors<TCommand>(TCommand command)
         where TCommand : ICommand
     {
         return _pipelineStore.GetPostprocessors(command)
             .Select(type => type.MakeGenericType(command.GetType()))
             .Select(type => _serviceProvider.GetRequiredService(type))
-            .Cast<ICommandPostProcessor<TCommand>>()
+            .Cast<ICommandPostprocessor<TCommand>>()
             .ToArray();
     }
     

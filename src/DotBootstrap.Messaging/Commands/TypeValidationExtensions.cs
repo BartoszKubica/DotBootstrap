@@ -19,7 +19,7 @@ internal static class TypeValidationExtensions
     {
         if (type.GetInterfaces()
             .Where(i => i.IsGenericType)
-            .All(i => i.GetGenericTypeDefinition() != typeof(ICommandPostProcessor<>)))
+            .All(i => i.GetGenericTypeDefinition() != typeof(ICommandPostprocessor<>)))
         {
             throw new ArgumentException($"{type.Name} is not a command postprocessor");
         }

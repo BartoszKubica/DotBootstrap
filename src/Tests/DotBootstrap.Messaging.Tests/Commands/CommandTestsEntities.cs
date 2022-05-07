@@ -61,7 +61,7 @@ public class TestPreprocessor<TCommand> : ICommandPreprocessor<TCommand>
     }
 }
 
-public class TestPostprocessor<TCommand> : ICommandPostProcessor<TCommand>
+public class TestPostprocessor<TCommand> : ICommandPostprocessor<TCommand>
     where TCommand : ICommand
 {
     private readonly InvokeRecorder _invokeRecorder;

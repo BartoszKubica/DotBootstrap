@@ -3,7 +3,7 @@ using DotBootstrap.Messaging.Contracts;
 
 namespace DotBootstrap.Messaging.Commands.CommandPipelines;
 
-public interface IPipelineStore
+public interface ICommandPipelineStore
 {
     void AddGlobalPreprocessor(Type commandPreprocessor);
     void AddGlobalPostprocessor(Type commandPostprocessor);
@@ -22,7 +22,7 @@ public interface IPipelineStore
         where TCommand : ICommand;
 }
 
-internal class PipelineStore : IPipelineStore
+internal class CommandPipelineStore : ICommandPipelineStore
 {
     private readonly IList<Type> _globalPreprocessors = new List<Type>();
     private readonly IList<Type> _globalPostprocessor = new List<Type>();

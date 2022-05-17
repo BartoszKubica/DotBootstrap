@@ -9,16 +9,16 @@ internal interface ICommandPostProcessorRunner
 
 internal class CommandPostProcessorRunner : ICommandPostProcessorRunner
 {
-    private readonly IPipelineInvoker _pipelineInvoker;
+    private readonly ICommandPipelineInvoker _commandPipelineInvoker;
 
-    public CommandPostProcessorRunner(IPipelineInvoker pipelineInvoker)
+    public CommandPostProcessorRunner(ICommandPipelineInvoker commandPipelineInvoker)
     {
-        _pipelineInvoker = pipelineInvoker;
+        _commandPipelineInvoker = commandPipelineInvoker;
     }
 
     public async Task Process<TCommand>(TCommand command) where TCommand : ICommand
     {
-        var postprocessors = _pipelineInvoker.InvokePostprocessors(command);
+        var postprocessors = _commandPipelineInvoker.InvokePostprocessors(command);
 
         foreach (var postprocessor in postprocessors)
         {

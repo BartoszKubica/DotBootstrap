@@ -75,7 +75,6 @@ public class TestPostprocessor<TCommand> : ICommandPostprocessor<TCommand>
     {
         _invokeRecorder.Messages.Add($"{command.GetType()} {nameof(TestPostprocessor<TCommand>)}");
         return Task.CompletedTask;
-        ;
     }
 }
 
@@ -115,9 +114,4 @@ public class TestMiddleware2<TCommand> : ICommandMiddleware<TCommand> where TCom
 
         return Task.CompletedTask;
     }
-}
-
-public class InvokeRecorder
-{
-    public IList<string> Messages { get; } = new List<string>();
 }

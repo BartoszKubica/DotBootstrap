@@ -1,35 +1,59 @@
 using DotBootstrap.Messaging.Commands.CommandPipelines;
 using DotBootstrap.Messaging.Contracts;
+using DotBootstrap.Messaging.Queries;
+using DotBootstrap.Messaging.Queries.QueryPipelines;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotBootstrap.Messaging.Commands;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddMessaging(this IServiceCollection serviceCollection, Action<IPipelineConfigurator>?
-        action = null)
+    public static void AddMessaging(this IServiceCollection serviceCollection, Action<ICommandPipelineConfigurator>?
+        commandConfiguration = null, Action<IQueryPipelineConfigurator>? queryConfiguration = null)
     {
         serviceCollection.AddScoped<ICommandBus, CommandBus>();
         serviceCollection.AddScoped<ICommandPreprocessorRunner, CommandPreprocessorRunner>();
         serviceCollection.AddScoped<ICommandPostProcessorRunner, CommandPostProcessorRunner>();
         serviceCollection.AddScoped<ICommandPipelineRunner, CommandPipelineRunner>();
-        serviceCollection.AddScoped<IPipelineInvoker, PipelineInvoker>();
+        serviceCollection.AddScoped<ICommandPipelineInvoker, CommandPipelineInvoker>();
 
-        PipelineStore? pipelineProvider = null;
-        if (action is not null)
+        serviceCollection.AddScoped<IQueryBus, QueryBus>();
+        serviceCollection.AddScoped<IQueryPreprocessorRunner, QueryPreprocessorRunner>();
+        serviceCollection.AddScoped<IQueryPostprocessorRunner, QueryPostprocessorRunner>();
+        serviceCollection.AddScoped<IQueryPipelineRunner, QueryPipelineRunner>();
+        serviceCollection.AddScoped<IQueryPipelineInvoker, QueryPipelineInvoker>();
+        
+        CommandPipelineStore? commandPipelineProvider = null;
+        QueryPipelineStore? queryPipelineProvider = null;
+        if (commandConfiguration is not null)
         {
-            var configurator = new PipelineConfigurator(serviceCollection);
-            action(configurator);
-            pipelineProvider = configurator.Configure();
+            var configurator = new CommandPipelineConfigurator(serviceCollection);
+            commandConfiguration(configurator);
+            commandPipelineProvider = configurator.Configure();
+        }
+        
+        if (queryConfiguration is not null)
+        {
+            var configurator = new QueryPipelineConfigurator(serviceCollection);
+            queryConfiguration(configurator);
+            queryPipelineProvider = configurator.Configure();
         }
 
-        serviceCollection.AddSingleton(pipelineProvider ?? new PipelineStore());
+        serviceCollection.AddSingleton(commandPipelineProvider ?? new CommandPipelineStore());
+        serviceCollection.AddSingleton(queryPipelineProvider ?? new QueryPipelineStore());
     }
 
     public static IServiceCollection RegisterCommandHandler<TCommand, THandler>(this IServiceCollection services)
         where TCommand : class, ICommand where THandler : class, ICommandHandler<TCommand>
     {
         services.AddTransient<ICommandHandler<TCommand>, THandler>();
+        return services;
+    }
+    
+    public static IServiceCollection RegisterQueryHandler<TQuery, TResponse, THandler>(this IServiceCollection services)
+        where TQuery : class, IQuery<TResponse> where THandler : class, IQueryHandler<TQuery, TResponse>
+    {
+        services.AddTransient<IQueryHandler<TQuery, TResponse>, THandler>();
         return services;
     }
 

@@ -11,6 +11,7 @@ internal class QueryWrapper<TQuery, TResponse> : QueryWrapperBase<TResponse> whe
 {
     private readonly IQueryHandler<TQuery, TResponse> _queryHandler;
     private readonly IQueryPipelineRunner _queryPipelineRunner;
+
     public QueryWrapper(IQueryHandler<TQuery, TResponse> queryHandler, IQueryPipelineRunner queryPipelineRunner)
     {
         _queryHandler = queryHandler;
@@ -19,7 +20,7 @@ internal class QueryWrapper<TQuery, TResponse> : QueryWrapperBase<TResponse> whe
 
     public override Task<TResponse> Process(IQuery<TResponse> query, CancellationToken cancellationToken)
     {
-      return _queryPipelineRunner.RunPipeline((TQuery)query, cancellationToken, 
-          () => _queryHandler.Execute((TQuery)query, cancellationToken));
+        return _queryPipelineRunner.RunPipeline((TQuery)query, cancellationToken,
+            () => _queryHandler.Execute((TQuery)query, cancellationToken));
     }
 }

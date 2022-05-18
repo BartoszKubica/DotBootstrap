@@ -68,4 +68,16 @@ public static class ServiceCollectionExtensions
                                                   i.GetGenericTypeDefinition() == handlerType))
             .WithTransientLifetime());
     }
+    
+    private static IServiceCollection RegisterAllQueryHandlersFromAssembly<TType>(this IServiceCollection services)
+    {
+        var handlerType = typeof(IQueryHandler<,>);
+        return services.Scan(scan => scan
+            .FromAssemblyOf<TType>()
+            .AddClasses(c => c.Where(t => !t.ContainsGenericParameters)
+                .AssignableTo(handlerType))
+            .As(t => t.GetInterfaces().Where(i => i.IsGenericType &&
+                                                  i.GetGenericTypeDefinition() == handlerType))
+            .WithTransientLifetime());
+    }
 }

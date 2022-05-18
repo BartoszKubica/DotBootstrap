@@ -1,7 +1,9 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Contracts;
 using DotBootstrap.Messaging.Queries;
+using DotBootstrap.Messaging.Queries.QueryPipelines;
 
 namespace DotBootstrap.Messaging.Tests.Queries;
 
@@ -77,5 +79,43 @@ public class TestQueryPreprocessor<TQuery, TResponse> : IQueryPreprocessor<TQuer
     {
         _invokeRecorder.Messages.Add($"{query.GetType()} {nameof(TestQueryPreprocessor<TQuery, TResponse>)}");
         return Task.CompletedTask;
+    }
+}
+
+public class TestQueryMiddleware<TQuery, TResponse> : IQueryMiddleware<TQuery, TResponse> where TQuery : IQuery<TResponse>
+{
+    private readonly InvokeRecorder _invokeRecorder;
+
+    public TestQueryMiddleware(InvokeRecorder invokeRecorder)
+    {
+        _invokeRecorder = invokeRecorder;
+    }
+
+
+    public Task<TResponse> Process(TQuery query, CancellationToken cancellationToken, Func<Task<TResponse>> next)
+    {
+        _invokeRecorder.Messages.Add($"{nameof(TestQueryMiddleware<TQuery, TResponse>)} before");
+        var result = next();
+        _invokeRecorder.Messages.Add($"{nameof(TestQueryMiddleware<TQuery, TResponse>)} after");
+        return result;
+    }
+}
+
+public class TestQueryMiddleware2<TQuery, TResponse> : IQueryMiddleware<TQuery, TResponse> where TQuery : IQuery<TResponse>
+{
+    private readonly InvokeRecorder _invokeRecorder;
+
+    public TestQueryMiddleware2(InvokeRecorder invokeRecorder)
+    {
+        _invokeRecorder = invokeRecorder;
+    }
+
+    public Task<TResponse> Process(TQuery query, CancellationToken cancellationToken, Func<Task<TResponse>> next)
+    {
+        _invokeRecorder.Messages.Add($"{nameof(TestQueryMiddleware2<TQuery, TResponse>)} before");
+        var result = next();
+        _invokeRecorder.Messages.Add($"{nameof(TestQueryMiddleware2<TQuery, TResponse>)} after");
+
+        return result;
     }
 }

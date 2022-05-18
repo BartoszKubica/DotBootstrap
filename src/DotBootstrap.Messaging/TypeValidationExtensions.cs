@@ -39,12 +39,11 @@ internal static class TypeValidationExtensions
     
     internal static void IsQueryPreprocessor(this Type type)
     {
-        var ina = type.GetInterfaces().Single();
         if (type.GetInterfaces()
             .Where(i => i.IsGenericType)
             .All(i => i.GetGenericTypeDefinition() != typeof(IQueryPreprocessor<,>)))
         {
-            throw new ArgumentException($"{type.Name} is not a command preprocessor");
+            throw new ArgumentException($"{type.Name} is not a query preprocessor");
         }
     }
     
@@ -54,7 +53,7 @@ internal static class TypeValidationExtensions
             .Where(i => i.IsGenericType)
             .All(i => i.GetGenericTypeDefinition() != typeof(IQueryPostprocessor<,>)))
         {
-            throw new ArgumentException($"{type.Name} is not a command postprocessor");
+            throw new ArgumentException($"{type.Name} is not a query postprocessor");
         }
     }
     
@@ -64,7 +63,7 @@ internal static class TypeValidationExtensions
             .Where(i => i.IsGenericType)
             .All(i => i.GetGenericTypeDefinition() != typeof(IQueryMiddleware<,>)))
         {
-            throw new ArgumentException($"{type.Name} is not a command postprocessor");
+            throw new ArgumentException($"{type.Name} is not a query middleware");
         }
     }
 }

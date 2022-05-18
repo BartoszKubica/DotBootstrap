@@ -10,8 +10,9 @@ public interface IQueryBus
 
 internal class QueryBus : IQueryBus
 {
-    private readonly IServiceProvider _serviceProvider;
     private readonly IQueryPipelineRunner _queryPipelineRunner;
+    private readonly IServiceProvider _serviceProvider;
+
     public QueryBus(IServiceProvider serviceProvider, IQueryPipelineRunner queryPipelineRunner)
     {
         _serviceProvider = serviceProvider;
@@ -25,9 +26,11 @@ internal class QueryBus : IQueryBus
         var queryWrapperType = typeof(QueryWrapper<,>).MakeGenericType(queryType, typeof(TResponse));
 
         var handler = _serviceProvider.GetRequiredService(genericHandlerType);
-        
-        var wrapper = (QueryWrapperBase<TResponse>?)Activator.CreateInstance(queryWrapperType, handler, _queryPipelineRunner)
-                      ?? throw new NullReferenceException("Could not create command handler");
+
+        var wrapper =
+            (QueryWrapperBase<TResponse>?)Activator.CreateInstance(queryWrapperType, handler, 
+                _queryPipelineRunner)
+            ?? throw new NullReferenceException("Could not create command handler");
 
         return await wrapper.Process(query, cancellationToken);
     }

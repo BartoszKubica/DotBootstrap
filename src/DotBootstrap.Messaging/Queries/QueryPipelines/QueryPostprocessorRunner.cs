@@ -24,13 +24,9 @@ internal class QueryPostprocessorRunner : IQueryPostprocessorRunner
     {
         var postprocessors = _queryPipelineInvoker
             .InvokePostprocessors<TQuery, TResponse>(query);
-        //todo: find better solution
-        var resultTemp = result;
-        foreach (var postprocessor in postprocessors)
-        { 
-           resultTemp = await postprocessor.Process(query, resultTemp, cancellationToken);
-        }
 
-        return resultTemp;
+        return await postprocessors.Aggregate(Task.FromResult(result), async (current, postprocessor) => 
+            await postprocessor.Process(query, await current, cancellationToken));
     }
 }
+

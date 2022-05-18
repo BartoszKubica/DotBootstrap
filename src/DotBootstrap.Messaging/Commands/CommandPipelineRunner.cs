@@ -13,14 +13,14 @@ internal class CommandPipelineRunner : ICommandPipelineRunner
 {
     private readonly ICommandPostProcessorRunner _commandPostprocessorRunner;
     private readonly ICommandPreprocessorRunner _commandPreprocessorRunner;
-    private readonly IPipelineInvoker _pipelineInvoker;
+    private readonly ICommandPipelineInvoker _commandPipelineInvoker;
 
     public CommandPipelineRunner(ICommandPostProcessorRunner commandPostprocessorRunner, 
-        ICommandPreprocessorRunner commandPreprocessorRunner, IPipelineInvoker pipelineInvoker)
+        ICommandPreprocessorRunner commandPreprocessorRunner, ICommandPipelineInvoker commandPipelineInvoker)
     {
         _commandPostprocessorRunner = commandPostprocessorRunner;
         _commandPreprocessorRunner = commandPreprocessorRunner;
-        _pipelineInvoker = pipelineInvoker;
+        _commandPipelineInvoker = commandPipelineInvoker;
     }
 
     public async Task RunPipeline<TCommand>(TCommand command, CommandWrapperBase commandWrapper)
@@ -32,7 +32,7 @@ internal class CommandPipelineRunner : ICommandPipelineRunner
         }
 
         await _commandPreprocessorRunner.Process(command);
-        await _pipelineInvoker.InvokeMiddlewares(command).Reverse().Aggregate((Func<Task>)Invoke, 
+        await _commandPipelineInvoker.InvokeMiddlewares(command).Reverse().Aggregate((Func<Task>)Invoke, 
             (next, middleware) =>
             () => middleware.Process(command, next))();
         await _commandPostprocessorRunner.Process(command);

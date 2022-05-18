@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Commands;
 using FluentAssertions;
@@ -54,5 +55,15 @@ public class CommandMiddlewaresTests
         invokerRecorder.Messages[1].Should().Be($"{command.GetType()} {nameof(TestCommandHandler)}");
         invokerRecorder.Messages[2].Should().Be($"{nameof(TestMiddleware<TestCommand>)} after");
         command.Handled.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void AddNotMiddlewareType_AsMiddleware_ShouldThrowException()
+    {
+        var serviceCollection = new ServiceCollection();
+        var act = () => serviceCollection.AddMessaging(commandConfiguration: c =>
+            c.AddGlobalMiddleware(typeof(TestCommand)));
+
+        act.Should().ThrowExactly<ArgumentException>();
     }
 }

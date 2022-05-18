@@ -113,7 +113,7 @@ public class CommandProcessorTests
     {
         var serviceCollection = new ServiceCollection();
         var act = () => serviceCollection.AddMessaging(c =>
-            c.AddGlobalPostprocessor(typeof(TestCommand)));
+            c.AddGlobalPreprocessor(typeof(TestCommand)));
 
         act.Should().ThrowExactly<ArgumentException>();
     }

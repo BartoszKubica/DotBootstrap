@@ -9,16 +9,16 @@ internal interface ICommandPreprocessorRunner
 
 internal class CommandPreprocessorRunner : ICommandPreprocessorRunner
 {
-    private readonly IPipelineInvoker _pipelineInvoker;
+    private readonly ICommandPipelineInvoker _commandPipelineInvoker;
 
-    public CommandPreprocessorRunner(IPipelineInvoker pipelineInvoker)
+    public CommandPreprocessorRunner(ICommandPipelineInvoker commandPipelineInvoker)
     {
-        _pipelineInvoker = pipelineInvoker;
+        _commandPipelineInvoker = commandPipelineInvoker;
     }
 
     public async Task Process<TCommand>(TCommand command) where TCommand : ICommand
     {
-        var preprocessors = _pipelineInvoker.InvokePreprocessors(command);
+        var preprocessors = _commandPipelineInvoker.InvokePreprocessors(command);
 
         foreach (var preprocessor in preprocessors)
         {

@@ -5,15 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bf29584-d2e1-4fd2-88c7-aa6e1e967311" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryMiddlewaresTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DotBootstrap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DotBootstrap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/ServiceCollectionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/TypeValidationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/TypeValidationExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryBus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryPipelines/QueryPostprocessorRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryPipelines/QueryPostprocessorRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandPipelineConfigurator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandPipelineConfigurator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandPipelineRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandPipelineRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/CommandWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/ICommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Commands/ICommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryPipelineConfigurator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryPipelineConfigurator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/ServiceCollectionExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DotBootstrap.Messaging/TypeValidationExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/TypeValidationExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandMessagingTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandMessagingTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandMiddlewaresTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandMiddlewaresTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryTestEntities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryTestEntities.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandProcessorsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandProcessorsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandTestsEntities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Commands/CommandTestsEntities.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryMessagingTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryMessagingTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryMiddlewaresTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryMiddlewaresTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryProcessorsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/DotBootstrap.Messaging.Tests/Queries/QueryProcessorsTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,13 +226,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryPipelineConfigurator.cs</url>
-          <line>38</line>
+          <line>37</line>
           <properties documentPath="$PROJECT_DIR$/src/DotBootstrap.Messaging/Queries/QueryPipelineConfigurator.cs" initialLine="38" containingFunctionPresentation="method 'AddGlobalPreprocessor'">
             <startOffsets>
-              <option value="1559" />
+              <option value="1503" />
             </startOffsets>
             <endOffsets>
-              <option value="1594" />
+              <option value="1538" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="8" />

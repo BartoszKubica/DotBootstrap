@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Commands;
 using FluentAssertions;
@@ -24,7 +25,7 @@ public class CommandMiddlewaresTests
         var commandBus = sp.GetRequiredService<ICommandBus>();
 
         var command = new TestCommand();
-        await commandBus.Send(command);
+        await commandBus.Send(command, CancellationToken.None);
 
         invokerRecorder.Messages[0].Should().Be($"{nameof(TestMiddleware<TestCommand>)} before");
         invokerRecorder.Messages[1].Should().Be($"{nameof(TestMiddleware2<TestCommand>)} before");
@@ -49,7 +50,7 @@ public class CommandMiddlewaresTests
         var commandBus = sp.GetRequiredService<ICommandBus>();
 
         var command = new TestCommand();
-        await commandBus.Send(command);
+        await commandBus.Send(command, CancellationToken.None);
 
         invokerRecorder.Messages[0].Should().Be($"{nameof(TestMiddleware<TestCommand>)} before");
         invokerRecorder.Messages[1].Should().Be($"{command.GetType()} {nameof(TestCommandHandler)}");

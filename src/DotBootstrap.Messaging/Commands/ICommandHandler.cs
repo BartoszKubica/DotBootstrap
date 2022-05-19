@@ -4,5 +4,5 @@ namespace DotBootstrap.Messaging.Commands;
 
 public interface ICommandHandler<in TRequest> where TRequest : ICommand
 {
-    Task Execute(TRequest command);
+    Task Execute(TRequest command, CancellationToken cancellationToken);
 }

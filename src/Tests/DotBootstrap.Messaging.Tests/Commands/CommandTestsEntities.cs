@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Commands.CommandPipelines;
@@ -21,7 +21,7 @@ public class TestCommandHandler : ICommandHandler<TestCommand>
         _invokeRecorder = invokeRecorder;
     }
 
-    public async Task Execute(TestCommand command)
+    public async Task Execute(TestCommand command, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         _invokeRecorder.Messages.Add($"{command.GetType()} {nameof(TestCommandHandler)}");
@@ -36,7 +36,7 @@ public class TestCommand2 : ICommand
 
 public class TestCommandHandler2 : ICommandHandler<TestCommand2>
 {
-    public async Task Execute(TestCommand2 command)
+    public async Task Execute(TestCommand2 command, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         command.Handled = true;
@@ -57,7 +57,6 @@ public class TestPreprocessor<TCommand> : ICommandPreprocessor<TCommand>
     {
         _invokeRecorder.Messages.Add($"{command.GetType()} {nameof(TestPreprocessor<TCommand>)}");
         return Task.CompletedTask;
-        ;
     }
 }
 

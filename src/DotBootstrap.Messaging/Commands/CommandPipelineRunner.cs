@@ -5,7 +5,7 @@ namespace DotBootstrap.Messaging.Commands;
 
 internal interface ICommandPipelineRunner
 {
-    Task RunPipeline<TCommand>(TCommand command, CommandWrapperBase commandWrapper)
+    Task RunPipeline<TCommand>(TCommand command, CancellationToken cancellationToken, CommandWrapperBase commandWrapper)
         where TCommand : ICommand;
 }
 
@@ -23,12 +23,13 @@ internal class CommandPipelineRunner : ICommandPipelineRunner
         _commandPipelineInvoker = commandPipelineInvoker;
     }
 
-    public async Task RunPipeline<TCommand>(TCommand command, CommandWrapperBase commandWrapper)
+    public async Task RunPipeline<TCommand>(TCommand command, CancellationToken cancellationToken,
+        CommandWrapperBase commandWrapper)
         where TCommand : ICommand
     {
         async Task Invoke()
         {
-            await commandWrapper.Process(command);
+            await commandWrapper.Process(command, cancellationToken);
         }
 
         await _commandPreprocessorRunner.Process(command);

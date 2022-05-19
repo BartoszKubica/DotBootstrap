@@ -1,8 +1,9 @@
+using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Commands.CommandPipelines;
 using DotBootstrap.Messaging.Queries;
 using DotBootstrap.Messaging.Queries.QueryPipelines;
 
-namespace DotBootstrap.Messaging.Commands;
+namespace DotBootstrap.Messaging;
 
 internal static class TypeValidationExtensions
 {

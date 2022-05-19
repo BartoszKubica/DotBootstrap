@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Queries;
-using DotBootstrap.Messaging.Tests.Commands;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;

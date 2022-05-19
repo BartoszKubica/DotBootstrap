@@ -5,7 +5,7 @@ namespace DotBootstrap.Messaging.Commands;
 
 public interface ICommandBus
 {
-    Task Send<TCommand>(TCommand command) where TCommand : ICommand;
+    Task Send<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand;
 }
 
 internal class CommandBus : ICommandBus
@@ -19,7 +19,7 @@ internal class CommandBus : ICommandBus
         _pipelineRunner = pipelineRunner;
     }
 
-    public Task Send<TCommand>(TCommand command) where TCommand : ICommand
+    public Task Send<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand
     {
         var commandType = command.GetType();
         var genericHandlerType = typeof(ICommandHandler<>).MakeGenericType(commandType);
@@ -30,6 +30,6 @@ internal class CommandBus : ICommandBus
         var wrapper = (CommandWrapperBase?)Activator.CreateInstance(commandWrapperType, handler)
             ?? throw new NullReferenceException("Could not create command handler");
 
-        return _pipelineRunner.RunPipeline(command, wrapper);
+        return _pipelineRunner.RunPipeline(command, cancellationToken, wrapper);
     }
 }

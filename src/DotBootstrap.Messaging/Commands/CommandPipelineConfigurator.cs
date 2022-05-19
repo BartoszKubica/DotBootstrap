@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using DotBootstrap.Messaging.Commands.CommandPipelines;
 using DotBootstrap.Messaging.Contracts;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Commands;
 using FluentAssertions;
@@ -24,7 +25,7 @@ public class CommandProcessorTests
         var commandBus = sp.GetRequiredService<ICommandBus>();
 
         var command = new TestCommand();
-        await commandBus.Send(command);
+        await commandBus.Send(command, CancellationToken.None);
 
         invokerRecorder.Messages[0].Should().Be($"{command.GetType()} {nameof(TestPreprocessor<TestCommand>)}");
         invokerRecorder.Messages[1].Should().Be($"{command.GetType()} {nameof(TestCommandHandler)}");
@@ -49,8 +50,8 @@ public class CommandProcessorTests
 
         var command = new TestCommand();
         var command2 = new TestCommand2();
-        await commandBus.Send(command);
-        await commandBus.Send(command2);
+        await commandBus.Send(command, CancellationToken.None);
+        await commandBus.Send(command2, CancellationToken.None);
 
         invokerRecorder.Messages[0].Should().Be($"{command.GetType()} {nameof(TestPreprocessor<TestCommand>)}");
         invokerRecorder.Messages[1].Should().Be($"{command.GetType()} {nameof(TestCommandHandler)}");
@@ -76,8 +77,8 @@ public class CommandProcessorTests
 
         var command = new TestCommand();
         var command2 = new TestCommand2();
-        await commandBus.Send(command);
-        await commandBus.Send(command2);
+        await commandBus.Send(command, CancellationToken.None);
+        await commandBus.Send(command2, CancellationToken.None);
 
         invokerRecorder.Messages[0].Should().Be($"{command.GetType()} {nameof(TestCommandHandler)}");
         invokerRecorder.Messages[1].Should().Be($"{command.GetType()} {nameof(TestPostprocessor<TestCommand>)}");
@@ -100,7 +101,7 @@ public class CommandProcessorTests
         var commandBus = sp.GetRequiredService<ICommandBus>();
 
         var command = new TestCommand();
-        await commandBus.Send(command);
+        await commandBus.Send(command, CancellationToken.None);
 
         invokerRecorder.Messages[0].Should().Be($"{command.GetType()} {nameof(TestCommandHandler)}");
         invokerRecorder.Messages[1].Should().Be($"{command.GetType()} {nameof(TestPostprocessor<TestCommand>)}");

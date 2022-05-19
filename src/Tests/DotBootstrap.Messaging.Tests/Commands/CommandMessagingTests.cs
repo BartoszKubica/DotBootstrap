@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using DotBootstrap.Messaging.Commands;
 using FluentAssertions;
@@ -20,7 +21,7 @@ public class CommandMessagingTests
         var commandBus = sp.GetRequiredService<ICommandBus>();
 
         var command = new TestCommand();
-        await commandBus.Send(command);
+        await commandBus.Send(command, CancellationToken.None);
 
         command.Handled.Should().BeTrue();
     }

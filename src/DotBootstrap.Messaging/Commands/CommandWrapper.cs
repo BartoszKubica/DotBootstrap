@@ -4,7 +4,7 @@ namespace DotBootstrap.Messaging.Commands;
 
 internal abstract class CommandWrapperBase
 {
-    public abstract Task Process(ICommand command);
+    public abstract Task Process(ICommand command, CancellationToken cancellationToken);
 }
 
 internal class CommandWrapper<TCommand> : CommandWrapperBase where TCommand : ICommand
@@ -16,8 +16,8 @@ internal class CommandWrapper<TCommand> : CommandWrapperBase where TCommand : IC
         _handler = handler;
     }
 
-    public override async Task Process(ICommand command)
+    public override async Task Process(ICommand command, CancellationToken cancellationToken)
     {
-        await _handler.Execute((TCommand)command);
+        await _handler.Execute((TCommand)command, cancellationToken);
     }
 }

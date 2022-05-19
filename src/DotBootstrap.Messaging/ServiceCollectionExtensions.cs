@@ -1,10 +1,11 @@
+using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Commands.CommandPipelines;
 using DotBootstrap.Messaging.Contracts;
 using DotBootstrap.Messaging.Queries;
 using DotBootstrap.Messaging.Queries.QueryPipelines;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DotBootstrap.Messaging.Commands;
+namespace DotBootstrap.Messaging;
 
 public static class ServiceCollectionExtensions
 {

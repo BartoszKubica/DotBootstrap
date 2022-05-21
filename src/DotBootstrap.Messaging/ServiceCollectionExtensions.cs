@@ -23,6 +23,8 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddScoped<IQueryPostprocessorRunner, QueryPostprocessorRunner>();
         serviceCollection.AddScoped<IQueryPipelineRunner, QueryPipelineRunner>();
         serviceCollection.AddScoped<IQueryPipelineInvoker, QueryPipelineInvoker>();
+
+        serviceCollection.AddScoped<ICommandQueryDispatcher, CommandQueryDispatcher>();
         
         CommandPipelineStore? commandPipelineProvider = null;
         QueryPipelineStore? queryPipelineProvider = null;

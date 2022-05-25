@@ -1,6 +1,7 @@
 using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Commands.CommandPipelines;
 using DotBootstrap.Messaging.Contracts;
+using DotBootstrap.Messaging.Events;
 using DotBootstrap.Messaging.Queries;
 using DotBootstrap.Messaging.Queries.QueryPipelines;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddScoped<IQueryPipelineRunner, QueryPipelineRunner>();
         serviceCollection.AddScoped<IQueryPipelineInvoker, QueryPipelineInvoker>();
 
+        serviceCollection.AddScoped<IEventBus, EventBus>();
         serviceCollection.AddScoped<ICommandQueryDispatcher, CommandQueryDispatcher>();
         
         CommandPipelineStore? commandPipelineProvider = null;
@@ -59,6 +61,13 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IQueryHandler<TQuery, TResponse>, THandler>();
         return services;
     }
+    
+    public static IServiceCollection RegisterEventHandler<TEvent, THandler>(this IServiceCollection services)
+        where TEvent : class, IEvent where THandler : class, IEventHandler<TEvent>
+    {
+        services.AddTransient<IEventHandler<TEvent>, THandler>();
+        return services;
+    }
 
     private static IServiceCollection RegisterAllCommandHandlersFromAssembly<TType>(this IServiceCollection services)
     {
@@ -75,6 +84,18 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection RegisterAllQueryHandlersFromAssembly<TType>(this IServiceCollection services)
     {
         var handlerType = typeof(IQueryHandler<,>);
+        return services.Scan(scan => scan
+            .FromAssemblyOf<TType>()
+            .AddClasses(c => c.Where(t => !t.ContainsGenericParameters)
+                .AssignableTo(handlerType))
+            .As(t => t.GetInterfaces().Where(i => i.IsGenericType &&
+                                                  i.GetGenericTypeDefinition() == handlerType))
+            .WithTransientLifetime());
+    }
+    
+    private static IServiceCollection RegisterAllEventHandlersFromAssembly<TType>(this IServiceCollection services)
+    {
+        var handlerType = typeof(IEventHandler<>);
         return services.Scan(scan => scan
             .FromAssemblyOf<TType>()
             .AddClasses(c => c.Where(t => !t.ContainsGenericParameters)

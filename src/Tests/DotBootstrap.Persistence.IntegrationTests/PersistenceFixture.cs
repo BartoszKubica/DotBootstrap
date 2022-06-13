@@ -1,3 +1,4 @@
+using System.Linq;
 using DotBootstrap.Messaging;
 using DotBootstrap.Persistence.Extensions;
 using DotBootstrap.Persistence.Repositories;
@@ -23,7 +24,9 @@ public class PersistenceFixture
         var sp = serviceCollection.BuildServiceProvider();
         DbContext = sp.GetRequiredService<DbContext>();
         InvokeRecorder = sp.GetRequiredService<InvokeRecorder>();
-        DbContext.Database.Migrate();
+        
+        if(this.DbContext.Database.GetPendingMigrations().Any())
+            DbContext.Database.Migrate();
         Repository = sp.GetRequiredService<IRepository<TestAggregate>>();
     }
 }

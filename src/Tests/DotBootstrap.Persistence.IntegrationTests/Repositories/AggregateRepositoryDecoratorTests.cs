@@ -16,7 +16,6 @@ public class AggregateRepositoryDecoratorTests : IClassFixture<PersistenceFixtur
         _fixture = fixture;
     }
 
-
     [Fact]
     public async Task Decorate_ShouldInvokeDecoratorAndDecoratedRepository()
     {

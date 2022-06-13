@@ -5,7 +5,7 @@ namespace DotBootstrap.Domain;
 public abstract class Aggregate : IVersionedEntity
 {
     public Guid Id { get; }
-    public long Version { get; private set; }
+    public long Version { get; protected set; }
     private readonly Queue<IAggregateEvent> _eventQueue = new();
     public IReadOnlyCollection<IAggregateEvent> Events => _eventQueue;
 

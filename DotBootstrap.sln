@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotBootstrap.Domain", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotBootstrap.Domain.Tests", "src\Tests\DotBootstrap.Domain.Tests\DotBootstrap.Domain.Tests.csproj", "{3BE17D3E-B810-4EB2-A993-4D9E4902C128}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotBootstrap.Persistence", "src\DotBootstrap.Persistence\DotBootstrap.Persistence.csproj", "{DA8A3E1A-E106-4B52-A812-88AE6E041BCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotBootstrap.Persistence.IntegrationTests", "src\Tests\DotBootstrap.Persistence.IntegrationTests\DotBootstrap.Persistence.IntegrationTests.csproj", "{D1C93213-0E68-4B7D-86F6-B0F25DFE3045}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +42,18 @@ Global
 		{3BE17D3E-B810-4EB2-A993-4D9E4902C128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE17D3E-B810-4EB2-A993-4D9E4902C128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE17D3E-B810-4EB2-A993-4D9E4902C128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8A3E1A-E106-4B52-A812-88AE6E041BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8A3E1A-E106-4B52-A812-88AE6E041BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8A3E1A-E106-4B52-A812-88AE6E041BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8A3E1A-E106-4B52-A812-88AE6E041BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1C93213-0E68-4B7D-86F6-B0F25DFE3045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1C93213-0E68-4B7D-86F6-B0F25DFE3045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1C93213-0E68-4B7D-86F6-B0F25DFE3045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1C93213-0E68-4B7D-86F6-B0F25DFE3045}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{85695B11-8EEB-49DF-BB51-44911711CD8D} = {FFEBD071-4998-41A2-9A3A-A87304A1D488}
 		{3BE17D3E-B810-4EB2-A993-4D9E4902C128} = {FFEBD071-4998-41A2-9A3A-A87304A1D488}
+		{D1C93213-0E68-4B7D-86F6-B0F25DFE3045} = {FFEBD071-4998-41A2-9A3A-A87304A1D488}
 	EndGlobalSection
 EndGlobal

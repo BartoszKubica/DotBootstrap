@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Queries;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;

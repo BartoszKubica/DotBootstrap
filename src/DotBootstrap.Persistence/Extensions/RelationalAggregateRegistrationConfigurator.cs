@@ -1,4 +1,3 @@
-using DotBootstrap.Domain;
 using DotBootstrap.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,12 +19,11 @@ public class RelationalAggregateRegistrationConfigurator<TEntity> where TEntity 
         return this;
     }
 
-    public RelationalAggregateRegistrationConfigurator<TEntity> WithDecorator<TDecorator>()
-        where TDecorator : IRepository<TEntity>
+    public RelationalAggregateRegistrationConfigurator<TEntity> WithDecorator(Type decorator)
     {
         _serviceCollection.Decorate(
             serviceType: typeof(IRepository<>).MakeGenericType(typeof(TEntity)),
-            decoratorType: typeof(TDecorator).MakeGenericType(typeof(TEntity)));
+            decoratorType: decorator.MakeGenericType(typeof(TEntity)));
 
         return this;
     }

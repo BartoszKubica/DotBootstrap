@@ -10,7 +10,7 @@ public static class DbContextProvider
     {
         services.ConfigureDbContext<TestDbContext>(x =>
         {
-            x.UseNpgsql("User ID=user;Password=user;Host=127.0.0.1;Port=5432;Database=test-db;");
+            x.UseNpgsql("User ID=user;Password=user;Host=localhostlocalhostlocalhostlocalhost;Port=5432;Database=test-db;");
         });
 
     }

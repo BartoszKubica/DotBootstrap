@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<TContext>(optionsBuilder);
         services.AddScoped<DbContext, TContext>();
+        services.AddScoped<ITransactionExecutor, TransactionExecutor>();
         return services;
     }
 }

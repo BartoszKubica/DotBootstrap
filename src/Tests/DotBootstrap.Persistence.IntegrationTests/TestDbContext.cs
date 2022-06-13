@@ -26,7 +26,7 @@ internal class TestDbContext : DbContext
     }
 }
 
-internal class TestAggregate : Aggregate
+public class TestAggregate : Aggregate
 {
     public string Text { get; set; }
     public int Number { get; set; }

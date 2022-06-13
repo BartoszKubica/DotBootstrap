@@ -21,9 +21,13 @@ public class RelationalAggregateRegistrationConfigurator<TEntity> where TEntity 
 
     public RelationalAggregateRegistrationConfigurator<TEntity> WithDecorator(Type decorator)
     {
+        if (decorator.GetInterfaces()
+            .Where(i => i.IsGenericType)
+            .All(i => i.GetGenericTypeDefinition() != typeof(IRepository<>)))
+            throw new ArgumentException($"{decorator.Name} is not repository");
         _serviceCollection.Decorate(
-            serviceType: typeof(IRepository<>).MakeGenericType(typeof(TEntity)),
-            decoratorType: decorator.MakeGenericType(typeof(TEntity)));
+            typeof(IRepository<>).MakeGenericType(typeof(TEntity)),
+            decorator.MakeGenericType(typeof(TEntity)));
 
         return this;
     }

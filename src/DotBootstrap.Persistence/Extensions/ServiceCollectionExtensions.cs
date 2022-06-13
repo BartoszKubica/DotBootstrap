@@ -7,9 +7,12 @@ namespace DotBootstrap.Persistence.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterAggregateRepository<TModel, TEntity, TMapper>(this IServiceCollection services, 
-        Action<RelationalAggregateRegistrationConfigurator<TEntity>>? action = null) 
-        where TEntity : Aggregate where TModel : class, IVersionedEntity where TMapper : class, IDomainMapper<TModel, TEntity>
+    public static IServiceCollection RegisterAggregateRepository<TModel, TEntity, TMapper>(
+        this IServiceCollection services,
+        Action<RelationalAggregateRegistrationConfigurator<TEntity>>? action = null)
+        where TEntity : Aggregate
+        where TModel : class, IVersionedEntity
+        where TMapper : class, IDomainMapper<TModel, TEntity>
     {
         services.AddScoped<IRepository<TEntity>, AggregateRepository<TModel, TEntity>>();
         services.AddScoped<IDomainMapper<TModel, TEntity>, TMapper>();
@@ -20,7 +23,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection ConfigureDbContext<TContext>(this IServiceCollection services, 
+    public static IServiceCollection ConfigureDbContext<TContext>(this IServiceCollection services,
         Action<DbContextOptionsBuilder> optionsBuilder) where TContext : DbContext
     {
         services.AddDbContext<TContext>(optionsBuilder);
@@ -29,4 +32,3 @@ public static class ServiceCollectionExtensions
         return services;
     }
 }
-

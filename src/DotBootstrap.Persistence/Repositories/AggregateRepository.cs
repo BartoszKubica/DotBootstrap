@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore;
 namespace DotBootstrap.Persistence.Repositories;
 
 internal class AggregateRepository<TModel, TEntity> : IRepository<TEntity> where TEntity : Aggregate
-where TModel : class, IVersionedEntity
+    where TModel : class, IVersionedEntity
 {
-    private readonly IEventBus _eventBus;
-    private readonly DbSet<TModel> _dbSet;
     private readonly DbContext _dbContext;
-    private readonly Func<IQueryable<TModel>, IQueryable<TModel>>? _queryTransformation;
+    private readonly DbSet<TModel> _dbSet;
+    private readonly IEventBus _eventBus;
     private readonly IDomainMapper<TModel, TEntity> _mapper;
-    private IQueryable<TModel> QueryBase => _queryTransformation is null ? _dbSet : _queryTransformation(_dbSet); 
+    private readonly Func<IQueryable<TModel>, IQueryable<TModel>>? _queryTransformation;
 
     public AggregateRepository(IEventBus eventBus, DbContext dbContext, IDomainMapper<TModel, TEntity> mapper,
         Func<IQueryable<TModel>, IQueryable<TModel>>? queryTransformation = null)
@@ -25,6 +24,8 @@ where TModel : class, IVersionedEntity
         _dbSet = _dbContext.Set<TModel>();
     }
 
+    private IQueryable<TModel> QueryBase => _queryTransformation is null ? _dbSet : _queryTransformation(_dbSet);
+
     public async Task Add(TEntity entity, CancellationToken cancellationToken)
     {
         await _dbSet.AddAsync(_mapper.Map(entity), cancellationToken);
@@ -35,9 +36,9 @@ where TModel : class, IVersionedEntity
     {
         var dbEntity = await SearchDb(entity.Id) ?? throw EntityNotFound.Instance<TEntity>(entity.Id);
         var initialVersion = GetVersion(dbEntity);
-        if(!initialVersion.Equals(version))
+        if (!initialVersion.Equals(version))
             throw OptimisticConcurrencyException.Instance;
-        
+
         _dbSet.Remove(dbEntity);
         await PublishEvents(entity);
     }
@@ -47,9 +48,9 @@ where TModel : class, IVersionedEntity
         var dbEntity = await SearchDb(entity.Id) ?? throw EntityNotFound.Instance<TEntity>(entity.Id);
 
         var initialVersion = GetVersion(dbEntity);
-        if(!initialVersion.Equals(version))
+        if (!initialVersion.Equals(version))
             throw OptimisticConcurrencyException.Instance;
-        
+
         _dbContext.Entry(dbEntity).CurrentValues.SetValues(_mapper.Map(entity));
         await PublishEvents(entity);
     }
@@ -68,10 +69,8 @@ where TModel : class, IVersionedEntity
 
     private async Task PublishEvents(TEntity entity)
     {
-        foreach (var @event in entity.DequeueAllEvents())
-        {
+        foreach (var @event in entity.DequeueAllEvents()) 
             await _eventBus.Publish(@event);
-        }
     }
 
     private async Task<TModel?> SearchDb(Guid id)
@@ -79,5 +78,9 @@ where TModel : class, IVersionedEntity
         return _dbSet.Local.SingleOrDefault(x => x.Id == id)
                ?? await QueryBase.SingleOrDefaultAsync(x => x.Id == id);
     }
-    private long GetVersion(TModel entity) => _dbContext.Entry(entity).Property(x => x.Version).OriginalValue;
+
+    private long GetVersion(TModel entity)
+    {
+        return _dbContext.Entry(entity).Property(x => x.Version).OriginalValue;
+    }
 }

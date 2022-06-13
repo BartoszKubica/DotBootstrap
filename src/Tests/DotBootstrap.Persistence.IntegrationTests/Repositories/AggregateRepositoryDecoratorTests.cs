@@ -7,7 +7,8 @@ using Xunit;
 
 namespace DotBootstrap.Persistence.IntegrationTests.Repositories;
 
-public class AggregateRepositoryDecoratorTests : IClassFixture<PersistenceFixture>
+[Collection("PersistenceFixture")]
+public class AggregateRepositoryDecoratorTests
 {
     private readonly PersistenceFixture _fixture;
 

@@ -1,4 +1,3 @@
-using DotBootstrap.Messaging.Commands;
 using DotBootstrap.Messaging.Contracts;
 using DotBootstrap.Messaging.Queries.QueryPipelines;
 using Microsoft.Extensions.DependencyInjection;

@@ -9,7 +9,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterAggregateRepository<TModel, TEntity, TMapper>(
         this IServiceCollection services,
-        Action<RelationalAggregateRegistrationConfigurator<TEntity>>? action = null)
+        Action<RelationalAggregateRegistrationConfigurator>? action = null)
         where TEntity : Aggregate
         where TModel : class, IVersionedEntity
         where TMapper : class, IDomainMapper<TModel, TEntity>
@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRepository<TEntity>, AggregateRepository<TModel, TEntity>>();
         services.AddScoped<IDomainMapper<TModel, TEntity>, TMapper>();
         if (action is null) return services;
-        var configurator = new RelationalAggregateRegistrationConfigurator<TEntity>(services);
+        var configurator = new RelationalAggregateRegistrationConfigurator(services);
         action(configurator);
 
         return services;

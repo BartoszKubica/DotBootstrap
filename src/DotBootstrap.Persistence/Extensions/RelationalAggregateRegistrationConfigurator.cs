@@ -24,7 +24,7 @@ public class RelationalAggregateRegistrationConfigurator<TEntity>
 
     public RelationalAggregateRegistrationConfigurator<TEntity> WithTenantGuardDecorator()
     {
-        if (typeof(TEntity).IsAssignableTo(typeof(ITenantEntity)))
+        if (!typeof(TEntity).IsAssignableTo(typeof(ITenantEntity)))
             throw new ArgumentException($"{nameof(TEntity)} is not implementing ITenantEntity interface.");
         
         _serviceCollection.Decorate<IRepository<TEntity>, TenantRepositoryDecorator<TEntity>>();

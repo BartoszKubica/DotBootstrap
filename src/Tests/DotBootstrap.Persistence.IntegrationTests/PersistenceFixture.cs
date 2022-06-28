@@ -34,8 +34,8 @@ public class PersistenceFixture : IDisposable
         var sp = serviceCollection.BuildServiceProvider();
         DbContext = sp.GetRequiredService<DbContext>();
         TenantSetter = sp.GetRequiredService<ITenantSetter>();
-        if(DbContext.Database.GetPendingMigrations().Any())
-            DbContext.Database.Migrate();
+        
+        DbContext.Database.Migrate();
         TestAggregateRepository = sp.GetRequiredService<IRepository<TestAggregate>>();
         TestTenantAggregateRepository = sp.GetRequiredService<IRepository<TestTenantAggregate>>();
     }

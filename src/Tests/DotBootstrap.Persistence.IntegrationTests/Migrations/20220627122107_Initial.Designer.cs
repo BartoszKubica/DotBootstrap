@@ -12,29 +12,27 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DotBootstrap.Persistence.IntegrationTests.Migrations
 {
     [DbContext(typeof(TestDbContext))]
-    [Migration("20220612105831_init")]
-    partial class init
+    [Migration("20220627122107_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DotBootstrap.Persistence.IntegrationTests.TestAggregate", b =>
+            modelBuilder.Entity("DotBootstrap.Persistence.IntegrationTests.TestAggregateDb", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<int>("Number")
                         .HasColumnType("integer");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<long>("Version")
@@ -43,7 +41,30 @@ namespace DotBootstrap.Persistence.IntegrationTests.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TestAggregate");
+                    b.ToTable("TestAggregate", (string)null);
+                });
+
+            modelBuilder.Entity("DotBootstrap.Persistence.IntegrationTests.TestTenantAggregateDb", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestTenantAggregate", (string)null);
                 });
 #pragma warning restore 612, 618
         }

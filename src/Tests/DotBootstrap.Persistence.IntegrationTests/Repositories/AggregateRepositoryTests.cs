@@ -22,10 +22,10 @@ public class AggregateRepositoryTests
     public async Task Add_ShouldSaveEntityToDatabase()
     {
         var aggregate = new TestAggregate(Guid.NewGuid(), 0, "test", 1);
-        await _fixture.Repository.Add(aggregate, CancellationToken.None);
+        await _fixture.TestAggregateRepository.Add(aggregate, CancellationToken.None);
         
         var savedCount = await _fixture.DbContext.SaveChangesAsync();
-        var result = await _fixture.Repository.Get(aggregate.Id);
+        var result = await _fixture.TestAggregateRepository.Get(aggregate.Id);
 
         savedCount.Should().Be(1);
         result.Should().BeEquivalentTo(aggregate);
@@ -35,11 +35,11 @@ public class AggregateRepositoryTests
     public async Task Delete_ShouldDeleteEntityFromDatabase()
     {
         var aggregate = new TestAggregate(Guid.NewGuid(), 0, "test", 1);
-        await _fixture.Repository.Add(aggregate, CancellationToken.None);
+        await _fixture.TestAggregateRepository.Add(aggregate, CancellationToken.None);
         await _fixture.DbContext.SaveChangesAsync();
-        var result = await _fixture.Repository.Get(aggregate.Id);
+        var result = await _fixture.TestAggregateRepository.Get(aggregate.Id);
 
-        await _fixture.Repository.Delete(result, result.Version);
+        await _fixture.TestAggregateRepository.Delete(result, result.Version);
         await _fixture.DbContext.SaveChangesAsync();
 
         var deletedEntity = await _fixture.DbContext.Set<TestAggregateDb>()
@@ -52,13 +52,13 @@ public class AggregateRepositoryTests
     public async Task Update_ShouldUpdateEntityInDatabase()
     {
         var aggregate = new TestAggregate(Guid.NewGuid(), 0, "test", 1);
-        await _fixture.Repository.Add(aggregate, CancellationToken.None);
+        await _fixture.TestAggregateRepository.Add(aggregate, CancellationToken.None);
         await _fixture.DbContext.SaveChangesAsync();
-        var result = await _fixture.Repository.Get(aggregate.Id);
+        var result = await _fixture.TestAggregateRepository.Get(aggregate.Id);
 
         result.Number = 3;
         result.Text = "test2";
-        await _fixture.Repository.Update(result, result.Version);
+        await _fixture.TestAggregateRepository.Update(result, result.Version);
         await _fixture.DbContext.SaveChangesAsync();
 
         var updatedEntity = await _fixture.DbContext.Set<TestAggregateDb>()
@@ -72,13 +72,13 @@ public class AggregateRepositoryTests
     public async Task Update_WhenVersionIsDifferent_ShouldThrowOptimisticConcurrencyException()
     {
         var aggregate = new TestAggregate(Guid.NewGuid(), 0, "test", 1);
-        await _fixture.Repository.Add(aggregate, CancellationToken.None);
+        await _fixture.TestAggregateRepository.Add(aggregate, CancellationToken.None);
         await _fixture.DbContext.SaveChangesAsync();
-        var result = await _fixture.Repository.Get(aggregate.Id);
+        var result = await _fixture.TestAggregateRepository.Get(aggregate.Id);
 
         result.Number = 3;
         result.Text = "test2";
-        var act = async () => await _fixture.Repository.Update(result, 3);
+        var act = async () => await _fixture.TestAggregateRepository.Update(result, 3);
 
         await act.Should().ThrowAsync<OptimisticConcurrencyException>();
     }

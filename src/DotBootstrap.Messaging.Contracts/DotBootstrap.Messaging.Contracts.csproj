@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Version>0.1-alpha</Version>
+    </PropertyGroup>
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>

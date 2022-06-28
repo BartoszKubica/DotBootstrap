@@ -26,7 +26,7 @@ public class PersistenceFixture : IDisposable
         serviceCollection.RegisterAggregateRepository<TestAggregateDb, TestAggregate, TestDomainMapper>();
         serviceCollection
             .RegisterAggregateRepository<TestTenantAggregateDb, TestTenantAggregate, TestTenantDomainMapper>(c =>
-                c.WithTenantGuardDecorator<TestTenantAggregate>());
+                c.WithTenantGuardDecorator());
         
         
         serviceCollection.AddMessaging();

@@ -5,7 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotBootstrap.Persistence.Extensions;
 
-public class RelationalAggregateRegistrationConfigurator
+public class RelationalAggregateRegistrationConfigurator<TEntity>
+    where TEntity : Aggregate
 {
     private readonly IServiceCollection _serviceCollection;
 
@@ -14,16 +15,18 @@ public class RelationalAggregateRegistrationConfigurator
         _serviceCollection = serviceCollection;
     }
 
-    public RelationalAggregateRegistrationConfigurator WithQuery<TEntity>(
-        Func<IQueryable<TEntity>, IQueryable<TEntity>> queryTransformation) where TEntity : Aggregate
+    public RelationalAggregateRegistrationConfigurator<TEntity> WithQuery(
+        Func<IQueryable<TEntity>, IQueryable<TEntity>> queryTransformation)
     {
         _serviceCollection.AddSingleton(queryTransformation);
         return this;
     }
 
-    public RelationalAggregateRegistrationConfigurator WithTenantGuardDecorator<TEntity>() where TEntity : Aggregate, 
-        ITenantEntity
+    public RelationalAggregateRegistrationConfigurator<TEntity> WithTenantGuardDecorator()
     {
+        if (typeof(TEntity).IsAssignableTo(typeof(ITenantEntity)))
+            throw new ArgumentException($"{nameof(TEntity)} is not implementing ITenantEntity interface.");
+        
         _serviceCollection.Decorate<IRepository<TEntity>, TenantRepositoryDecorator<TEntity>>();
 
         return this;

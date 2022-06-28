@@ -9,5 +9,5 @@ public class OutOfTenantException : BaseException
     }
 
     public static OutOfTenantException Instance
-        => new OutOfTenantException("Attempt to modify data out of the tenant");
+        => new OutOfTenantException("Attempt to access data out of the tenant.");
 }

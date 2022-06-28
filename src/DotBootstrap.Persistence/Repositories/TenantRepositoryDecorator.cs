@@ -4,7 +4,7 @@ using DotBootstrap.Persistence.Exceptions;
 
 namespace DotBootstrap.Persistence.Repositories;
 
-public class TenantRepositoryDecorator <TEntity> : IRepository<TEntity> where TEntity : Aggregate, ITenantEntity
+public class TenantRepositoryDecorator <TEntity> : IRepository<TEntity> where TEntity : Aggregate
 {
     private readonly IRepository<TEntity> _decorated;
     private readonly ITenantContext _tenantContext;
@@ -58,7 +58,8 @@ public class TenantRepositoryDecorator <TEntity> : IRepository<TEntity> where TE
 
     private void CheckTenancy(TEntity entity)
     {
-        if (entity.TenantId != _tenantContext.GetTenantId())
+        var e = (ITenantEntity)entity;
+        if (e.TenantId != _tenantContext.GetTenantId())
             throw OutOfTenantException.Instance;
     }
 }

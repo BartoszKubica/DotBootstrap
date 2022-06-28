@@ -42,7 +42,7 @@ public class PersistenceFixture : IDisposable
 
     public void Dispose()
     {
-        DbContext.Database.EnsureDeleted();
+       // DbContext.Database.EnsureDeleted();
         DbContext?.Dispose();
     }
 }

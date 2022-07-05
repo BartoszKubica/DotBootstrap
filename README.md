@@ -30,3 +30,9 @@ All events should implement `IEvent` interface. Event can be dispatched by `IEve
 
 There can be many event handlers for specific event.
 
+
+## DDD
+TBC
+
+## Persistence
+TBC

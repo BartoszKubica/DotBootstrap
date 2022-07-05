@@ -3,7 +3,7 @@
 Project contains infrastructure code for CQRS, DDD and persistance of data.
 
 ## Messaging
-`IServiceCollection.AddMessaging(ICommandPipelineConfigurator commandConfiguration, IQueryPipelineConfigurator queryConfiguration)` extension method allows to register all required services. Method accepts delegates which allows to configure pipeline items. Pipeline items can be add globally to every command/query or it can be add to specific command or query. It is also required to use `IServiceCollection.AddDotBootstrap` method to register necessary services. Commands and query can be dispatched by `ICommandQueryDispatcher`
+`IServiceCollection.AddMessaging(ICommandPipelineConfigurator commandConfiguration, IQueryPipelineConfigurator queryConfiguration)` extension method allows to register all required services. Method accepts delegates which allows to configure pipeline items. Pipeline items can be add globally to every command/query or it can be add to specific command or query. It is also required to use `IServiceCollection.AddDotBootstrap` method to register necessary services. Commands and queries can be dispatched by `ICommandQueryDispatcher`
 
 
 ### Commands
